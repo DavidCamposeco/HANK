@@ -2,6 +2,7 @@ PROGRAM Main
 
 USE Parameters
 USE Globals
+USE mUMFPACK
 
 CALL SetParameters
 IF (CalibrateCostFunction==1) CALL Calibration

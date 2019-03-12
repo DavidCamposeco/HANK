@@ -12,8 +12,8 @@ OPEN(3, FILE = trim(OutputDir) // 'SteadyStateEqumIteration.txt', STATUS = 'repl
 
 converged = .false.
 neqmiter = 1
-IF(calibrating == .false.) lstepKN = stepequmss
-IF(calibrating == .true. ) lstepKN = 0.2*stepequmss
+IF(calibrating .eqv. .false.) lstepKN = stepequmss
+IF(calibrating .eqv. .true. ) lstepKN = 0.2*stepequmss
 ldiffKN = 1.0
 
 IF(OneAssetNoCapital==0) THEN
@@ -36,7 +36,7 @@ CLOSE(3)
 			WRITE(*,*) '  implied KN firm: 	',KNratio
 		END IF
 
-		IF(initialSS == .true.) CALL Grids
+		IF(initialSS .eqv. .true.) CALL Grids
 		CALL IterateBellman
 		CALL StationaryDistribution
 		CALL DistributionStatistics
@@ -95,7 +95,7 @@ CLOSE(3)
 ELSE IF(OneAssetNoCapital==1) THEN
 
 	IF(DistributeProfitsInProportion==0) THEN
-		IF(initialSS == .true.)CALL Grids
+		IF(initialSS .eqv. .true.)CALL Grids
 		CALL IterateBellman
 		CALL StationaryDistribution
 		CALL DistributionStatistics
@@ -105,7 +105,7 @@ ELSE IF(OneAssetNoCapital==1) THEN
 	ELSE IF(DistributeProfitsInProportion==1) THEN  	!iterate on profits
 		ldiffprof=1
 		DO WHILE (neqmiter<=maxiterequmss .and. ldiffprof>tolequmss )
-			IF(initialSS == .true.)CALL Grids
+			IF(initialSS .eqv. .true.)CALL Grids
 			CALL IterateBellman
 			CALL StationaryDistribution
 			CALL DistributionStatistics
